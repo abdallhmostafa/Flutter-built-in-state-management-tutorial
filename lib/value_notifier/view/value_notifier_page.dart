@@ -3,8 +3,8 @@ import 'dart:math' show Random;
 import 'package:built_in_state_management/value_notifier/viewmodel/value_notifier_viewmodel.dart';
 import 'package:flutter/material.dart';
 
-class CounterScreenInheritedNotifier extends StatelessWidget {
-  const CounterScreenInheritedNotifier({super.key, required this.viewmodel});
+class ValueNotifierPage extends StatelessWidget {
+  const ValueNotifierPage({super.key, required this.viewmodel});
   final ValueNotifierViewmodel viewmodel;
   @override
   Widget build(BuildContext context) {
