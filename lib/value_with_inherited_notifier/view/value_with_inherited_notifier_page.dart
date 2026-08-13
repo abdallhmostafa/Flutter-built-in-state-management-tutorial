@@ -1,33 +1,16 @@
 import 'dart:math' show Random;
 
+import 'package:built_in_state_management/value_with_inherited_notifier/viewmodel/value_with_inherited_notifier_viewmodel.dart';
 import 'package:flutter/material.dart';
 
-class ValueAndInheritedNotifier extends InheritedNotifier {
-  const ValueAndInheritedNotifier({
-    super.key,
-    required super.child,
-    required this.counterNotifier,
-    required this.themeNotifier,
-    required this.colorNotifier,
-  });
 
-  final ValueNotifier<int> counterNotifier;
-  final ValueNotifier<bool> themeNotifier;
-  final ValueNotifier<Color> colorNotifier;
-
-  static ValueAndInheritedNotifier of(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<ValueAndInheritedNotifier>()!;
-  }
-}
-
-class CounterScreenValueAndInheritedNotifier extends StatelessWidget {
-  const CounterScreenValueAndInheritedNotifier({super.key});
+class ValueWithInheritedNotifierPage extends StatelessWidget {
+  const ValueWithInheritedNotifierPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     // List of colors to cycle through
-    final themeNotifier = ValueAndInheritedNotifier.of(context).themeNotifier;
+    final themeNotifier = ValueWithInheritedNotifierViewmodel.of(context).themeNotifier;
     final List<Color> colors = [
       Colors.blue,
       Colors.red,
@@ -39,11 +22,11 @@ class CounterScreenValueAndInheritedNotifier extends StatelessWidget {
       Colors.pink,
     ];
     return ValueListenableBuilder(
-      valueListenable: ValueAndInheritedNotifier.of(context).colorNotifier,
+      valueListenable: ValueWithInheritedNotifierViewmodel.of(context).colorNotifier,
       builder: (context, _, _) {
         return Scaffold(
           appBar: AppBar(),
-          backgroundColor: ValueAndInheritedNotifier.of(
+          backgroundColor: ValueWithInheritedNotifierViewmodel.of(
             context,
           ).colorNotifier.value,
           body: Center(
@@ -57,12 +40,12 @@ class CounterScreenValueAndInheritedNotifier extends StatelessWidget {
                 ),
                 ValueListenableBuilder(
                   builder: (context, value, child) => Text(
-                    ValueAndInheritedNotifier.of(
+                    ValueWithInheritedNotifierViewmodel.of(
                       context,
                     ).counterNotifier.value.toString(),
                     style: const TextStyle(fontSize: 30),
                   ),
-                  valueListenable: ValueAndInheritedNotifier.of(
+                  valueListenable: ValueWithInheritedNotifierViewmodel.of(
                     context,
                   ).counterNotifier,
                 ),
@@ -72,7 +55,7 @@ class CounterScreenValueAndInheritedNotifier extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {
-                        ValueAndInheritedNotifier.of(
+                        ValueWithInheritedNotifierViewmodel.of(
                           context,
                         ).counterNotifier.value++;
                       },
@@ -81,7 +64,7 @@ class CounterScreenValueAndInheritedNotifier extends StatelessWidget {
 
                     IconButton(
                       onPressed: () {
-                        ValueAndInheritedNotifier.of(
+                        ValueWithInheritedNotifierViewmodel.of(
                           context,
                         ).counterNotifier.value--;
                       },
@@ -93,7 +76,7 @@ class CounterScreenValueAndInheritedNotifier extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     // Select random color from list
-                    ValueAndInheritedNotifier.of(context).colorNotifier.value =
+                    ValueWithInheritedNotifierViewmodel.of(context).colorNotifier.value =
                         colors[Random().nextInt(colors.length)];
                   },
                   child: const Text("Change the Color"),

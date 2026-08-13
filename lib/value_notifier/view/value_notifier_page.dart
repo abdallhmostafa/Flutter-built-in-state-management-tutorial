@@ -1,18 +1,11 @@
 import 'dart:math' show Random;
 
+import 'package:built_in_state_management/value_notifier/viewmodel/value_notifier_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 class CounterScreenInheritedNotifier extends StatelessWidget {
-  const CounterScreenInheritedNotifier({
-    super.key,
-    required this.counterNotifier,
-    required this.colorNotifier,
-    required this.themeNotifier,
-  });
-  final ValueNotifier<int> counterNotifier;
-  final ValueNotifier<Color> colorNotifier;
-  final ValueNotifier<bool> themeNotifier;
-
+  const CounterScreenInheritedNotifier({super.key, required this.viewmodel});
+  final ValueNotifierViewmodel viewmodel;
   @override
   Widget build(BuildContext context) {
     // List of colors to cycle through
@@ -28,7 +21,7 @@ class CounterScreenInheritedNotifier extends StatelessWidget {
     ];
     return Scaffold(
       appBar: AppBar(),
-      backgroundColor: colorNotifier.value,
+      backgroundColor: viewmodel.colorNotifier.value,
       body: Center(
         child: Column(
           spacing: 20,
@@ -36,7 +29,7 @@ class CounterScreenInheritedNotifier extends StatelessWidget {
           children: [
             Text("Value Notifier", style: const TextStyle(fontSize: 30)),
             Text(
-              counterNotifier.value.toString(),
+              viewmodel.counterNotifier.value.toString(),
               style: const TextStyle(fontSize: 30),
             ),
             Row(
@@ -45,14 +38,14 @@ class CounterScreenInheritedNotifier extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    counterNotifier.value++;
+                    viewmodel.counterNotifier.value++;
                   },
                   icon: const Icon(Icons.add),
                 ),
 
                 IconButton(
                   onPressed: () {
-                    counterNotifier.value--;
+                    viewmodel.counterNotifier.value--;
                   },
                   icon: const Icon(Icons.remove),
                 ),
@@ -62,13 +55,14 @@ class CounterScreenInheritedNotifier extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Select random color from list
-                colorNotifier.value = colors[Random().nextInt(colors.length)];
+                viewmodel.colorNotifier.value =
+                    colors[Random().nextInt(colors.length)];
               },
               child: const Text("Change the Color"),
             ),
             ElevatedButton(
               onPressed: () {
-                colorNotifier.value != colorNotifier.value;
+                viewmodel.colorNotifier.value != viewmodel.colorNotifier.value;
               },
               child: const Text("Change the Theme"),
             ),
