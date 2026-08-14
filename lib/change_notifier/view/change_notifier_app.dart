@@ -1,3 +1,4 @@
+import 'package:built_in_state_management/change_notifier/view/change_notifier_cart_item_page.dart';
 import 'package:built_in_state_management/change_notifier/viewmodel/change_notifier_counter_and_color_model.dart';
 import 'package:built_in_state_management/change_notifier/viewmodel/change_notifier_theme_model.dart';
 import 'package:built_in_state_management/change_notifier/view/change_notifier_page.dart';
@@ -45,10 +46,11 @@ class _ChangeNotifierAppState extends State<ChangeNotifierApp> {
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        home: ChangeNotifierPage(
-          counterAndColorModel: counterModel,
-          themeModel: themeModel,
-        ),
+        home: ChangeNotifierCartItemPage(),
+        // ChangeNotifierPage(
+        //   counterAndColorModel: counterModel,
+        //   themeModel: themeModel,
+        // ),
       ),
     );
   }
